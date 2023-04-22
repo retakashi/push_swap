@@ -5,168 +5,48 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rtakashi <rtakashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/26 17:34:26 by reira             #+#    #+#             */
-/*   Updated: 2023/04/02 21:57:02 by rtakashi         ###   ########.fr       */
+/*   Created: 2023/04/01 17:44:11 by rtakashi          #+#    #+#             */
+/*   Updated: 2023/04/20 23:29:14 by rtakashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <string.h>
 
-typedef struct s_list
+static t_list	*sort_size_over6(t_list *a_stack, int i_max)
 {
-	char			*arr;
-	int				num;
-	int				cie;
-	struct s_list	*next;
-	struct s_list	*prev;
-}					t_list;
-
-//↓args_checkで出来そう
-void	change_int(int int_arr[], char **argv)
-{
-	int	i;
-
-	i = 1;
-	while (argv[i] != NULL)
-	{
-		int_arr[i] = atoi(argv[i]);
-		i++;
-	}
-}
-
-int	argv_words_count(char *argv)
-{
-	int	i;
-	int	words;
-
-	i = 0;
-	words = 0;
-	while (argv[i] != '\0')
-	{
-		if (argv[i] == '-' || (argv[i] >= '0' && argv[i] <= '9'
-				&& argv[i] != '\0'))
-			words++;
-		while (argv[i] >= '0' && argv[i] <= '9' && argv[i] != '\0')
-			i++;
-		i++;
-	}
-	return (words);
-}
-
-int	argv_len_count(char *argv)
-{
-	int	cnt;
-
-	cnt = 0;
-	while (*argv == '-' || (*argv >= '0' && *argv <= '9' && *argv != '\0'))
-	{
-		cnt++;
-		argv++;
-	}
-	return (cnt + 1);
-}
-
-char	**argc2_set_str2(char *argv)
-{
-	char	**str;
+	t_list	*b_stack;
 	int		i;
-	int		words;
-	int		len;
+	int		base;
+	int		num;
 
-	words = argv_words_count(argv);
-	str = malloc(sizeof(char *) * (words + 1));
-	if (str == NULL)
-		return (NULL);
-	str[words] = NULL;
+	b_stack = NULL;
 	i = 0;
-	while (i < words)
+	if (i_max < 500)
+		base = 7;
+	else
+		base = 15;
+	num = base;
+	while (a_stack != NULL)
 	{
-		len = argv_len_count(argv);
-		argv += len;
-		str[i] = malloc(sizeof(char) * (len));
-		if (str[i] == NULL)
-			return (NULL);
-		strlcpy(str[i], argv - len, len);
-		i++;
+		a_stack = move_to_b(&a_stack, &b_stack, base, num);
+		num = num + (base * 2);
 	}
-	return (str);
+	return_to_a(&a_stack, &b_stack, i_max, base);
+	return (a_stack);
 }
 
-t_list	*new_node(char *str)
+void	push_swap(t_list *a_stack, int i_max)
 {
-	t_list	*new;
-	int		len;
-
-	new = malloc(sizeof(t_list));
-	if (new == NULL)
-		return (NULL);
-	len = strlen(str) + 1;
-	new->arr = malloc(sizeof(char) * len);
-	if (new == NULL)
-		return (NULL);
-	strlcpy(new->arr, str, len);
-	new->num = atoi(new->arr);
-	return (new);
-}
-
-t_list	*set_node(int argc, char **argv)
-{
-	t_list	*node;
-	t_list	*new;
-	t_list	*head;
-	char	*str;
-	int		i;
-
-	i = 1;
-	argc2_set_str(str, *argv, i);
-		node = new_node(argv[i]);
-	head = node;
-	i++;
-	while (i <= argc)
+	if (i_max == 2)
 	{
-		new = new_node(argv[i]);
-		node->next = new;
-		new->prev = node;
-		node = new;
-		i++;
+		a_stack = sort_size2(a_stack, 0);
+		put_operations("sa");
 	}
-	return (head);
-}
-
-//int_arrのindex+1(座標圧縮)を二分探索でlst->cieに代入
-void	set_cie(int int_arr[], t_list *node, int min, int max)
-{
-	int	mid;
-
-	while (min <= max)
-	{
-		mid = (min + max) / 2;
-		if (node->num == int_arr[mid])
-		{
-			node->cie = mid;
-			node->num = int_arr[mid];
-			break ;
-		}
-		if (node->num < int_arr[mid])
-			max = mid;
-		else
-			min = mid + 1;
-	}
-}
-
-int	main()
-{
-	char	*str[10]= {"1230", "456", "789","0"};
-	char	**str2;
-	int		i;
-
-	i = 0;
-	str2 = argc2_set_str2(str[0]);
-	while (i < 4)
-	{
-		printf("str[%d] : %s\n", i, str2[i]);
-		i++;
-	}
-	return (0);
+	else if (i_max == 3)
+		a_stack = sort_size3(a_stack, 0);
+	else if (i_max > 3 && i_max < 7)
+		a_stack = sort_size_4to6(a_stack, i_max);
+	else
+		a_stack = sort_size_over6(a_stack, i_max);
+	ft_free(NULL, &a_stack);
 }
