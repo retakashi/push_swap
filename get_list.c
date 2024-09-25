@@ -6,36 +6,16 @@
 /*   By: rtakashi <rtakashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 17:34:26 by reira             #+#    #+#             */
-/*   Updated: 2023/04/20 23:02:19 by rtakashi         ###   ########.fr       */
+/*   Updated: 2023/05/03 17:53:43 by rtakashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	get_number(char *argv, int i, int *num)
+static int	new_node_error(t_list **node, t_list *head)
 {
-	int		j;
-	char	str[13];
-
-	j = 0;
-	while (argv[i] != '\0')
-	{
-		if (argv[i] == ' ' && argv[i + 1] != '\0')
-			i++;
-		if (argv[i] == '-' || argv[i] == '+')
-			str[j++] = argv[i++];
-		while (ft_isdigit(argv[i]))
-		{
-			str[j] = argv[i];
-			i++;
-			j++;
-		}
-		str[j] = '\0';
-		if (argv[i] == ' ' && argv[i + 1] != '\0')
-			break ;
-	}
-	*num = ft_atoi_intver(str);
-	return (i);
+	*node = head;
+	return (-1);
 }
 
 static t_list	*new_node(int num)
@@ -46,12 +26,13 @@ static t_list	*new_node(int num)
 	if (new == NULL)
 		return (NULL);
 	new->num = num;
+	new->next = NULL;
+	new->prev = NULL;
 	return (new);
 }
 
-static t_list	*get_node_argc2(char *argv)
+static int	get_node_argc2(char *argv, t_list **node)
 {
-	t_list	*node;
 	t_list	*new;
 	t_list	*head;
 	int		num;
@@ -59,57 +40,63 @@ static t_list	*get_node_argc2(char *argv)
 
 	i = 0;
 	i = get_number(argv, i, &num);
-	node = new_node(num);
-	head = node;
+	*node = new_node(num);
+	if (*node == NULL)
+		return (-1);
+	head = *node;
 	while (argv[i] != '\0')
 	{
 		i = get_number(argv, i, &num);
 		new = new_node(num);
 		if (new == NULL)
-			return (ft_free(NULL, &head));
-		new->prev = node;
-		node->next = new;
-		node = new;
+			return (new_node_error(node, head));
+		new->prev = *node;
+		(*node)->next = new;
+		*node = new;
 	}
-	head->prev = node;
-	node->next = head;
-	return (head);
+	head->prev = *node;
+	(*node)->next = head;
+	*node = head;
+	return (0);
 }
 
-static t_list	*get_node_argc_over2(int argc, char **argv)
+static int	get_node_argc_over2(int argc, char **argv, t_list **node)
 {
-	t_list	*node;
 	t_list	*new;
 	t_list	*head;
 	int		i;
 	int		num;
 
 	i = 1;
-	num = ft_atoi_intver(argv[i++]);
-	node = new_node(num);
-	head = node;
+	num = ft_atoi_intver(argv[i++], 0);
+	*node = new_node(num);
+	if (*node == NULL)
+		return (-1);
+	head = *node;
 	while (i < argc)
 	{
-		num = ft_atoi_intver(argv[i++]);
+		num = ft_atoi_intver(argv[i++], 0);
 		new = new_node(num);
 		if (new == NULL)
-			return (ft_free(NULL, &head));
-		new->prev = node;
-		node->next = new;
-		node = new;
+			return (new_node_error(node, head));
+		new->prev = *node;
+		(*node)->next = new;
+		*node = new;
 	}
-	node->next = head;
-	head->prev = node;
-	return (head);
+	head->prev = *node;
+	(*node)->next = head;
+	*node = head;
+	return (0);
 }
 
-t_list	*get_node(int argc, char **argv)
+int	get_node(int argc, char **argv, t_list **node)
 {
-	t_list	*head;
+	int	ret;
 
+	ret = 0;
 	if (argc == 2)
-		head = get_node_argc2(argv[1]);
+		ret = get_node_argc2(argv[1], node);
 	else
-		head = get_node_argc_over2(argc, argv);
-	return (head);
+		ret = get_node_argc_over2(argc, argv, node);
+	return (ret);
 }

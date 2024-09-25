@@ -6,7 +6,7 @@
 /*   By: rtakashi <rtakashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 17:44:11 by rtakashi          #+#    #+#             */
-/*   Updated: 2023/04/20 23:29:14 by rtakashi         ###   ########.fr       */
+/*   Updated: 2023/04/26 18:35:17 by rtakashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static t_list	*sort_size_over6(t_list *a_stack, int i_max)
 	if (i_max < 500)
 		base = 7;
 	else
-		base = 15;
+		base = 30;
 	num = base;
 	while (a_stack != NULL)
 	{
@@ -38,10 +38,7 @@ static t_list	*sort_size_over6(t_list *a_stack, int i_max)
 void	push_swap(t_list *a_stack, int i_max)
 {
 	if (i_max == 2)
-	{
 		a_stack = sort_size2(a_stack, 0);
-		put_operations("sa");
-	}
 	else if (i_max == 3)
 		a_stack = sort_size3(a_stack, 0);
 	else if (i_max > 3 && i_max < 7)

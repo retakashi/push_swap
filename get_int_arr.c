@@ -6,7 +6,7 @@
 /*   By: rtakashi <rtakashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 18:03:38 by rtakashi          #+#    #+#             */
-/*   Updated: 2023/04/20 23:21:11 by rtakashi         ###   ########.fr       */
+/*   Updated: 2023/05/03 17:35:38 by rtakashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,30 +61,33 @@ static int	*get_int_arr_argc_over2(int argc, char **argv, int *int_arr,
 	*i_max = argc - 1;
 	int_arr = malloc(sizeof(int) * *i_max);
 	if (int_arr == NULL)
-		return (0);
+		return (NULL);
 	i = 1;
 	while (i <= *i_max)
 	{
-		int_arr[i - 1] = ft_atoi_intver(argv[i]);
+		int_arr[i - 1] = ft_atoi_intver(argv[i], 0);
 		i++;
 	}
 	*i_max -= 1;
 	return (int_arr);
 }
 
-int	*get_int_arr(int argc, char **argv, int *int_arr, int *i_max)
+int	get_int_arr(int argc, char **argv, int **int_arr, int *i_max)
 {
+	int	ret;
+
+	ret = 0;
 	if (argc == 2)
-		int_arr = get_int_arr_argc2(argv[1], int_arr, i_max);
+		*int_arr = get_int_arr_argc2(argv[1], *int_arr, i_max);
 	else
-		int_arr = get_int_arr_argc_over2(argc, argv, int_arr, i_max);
-	if (int_arr == NULL)
-		return (NULL);
-	*i_max = sort_ascending_and_arror_check(int_arr, *i_max);
+		*int_arr = get_int_arr_argc_over2(argc, argv, *int_arr, i_max);
+	if (*int_arr == NULL)
+		return (-1);
+	*i_max = sort_ascending_and_error_check(*int_arr, *i_max);
 	if (*i_max == 0)
-		return (ft_free(int_arr, NULL));
+		return (0);
 	if (*i_max == -1)
-		return (ft_free(int_arr, NULL));
-	m_sort_partition(int_arr, 0, *i_max);
-	return (int_arr);
+		return (-1);
+	ret = m_sort_partition(*int_arr, 0, *i_max);
+	return (ret);
 }

@@ -6,7 +6,7 @@
 /*   By: rtakashi <rtakashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 16:04:08 by reira             #+#    #+#             */
-/*   Updated: 2023/04/20 22:40:41 by rtakashi         ###   ########.fr       */
+/*   Updated: 2023/05/03 15:56:31 by rtakashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,29 +52,33 @@ static int	merge_sort(int *int_arr, int left, int mid, int right)
 	while (r <= right)
 		sort[i++] = int_arr[r++];
 	arr_copy(int_arr, left, right, sort);
+	free(sort);
 	return (0);
 }
 
-void	m_sort_partition(int *int_arr, int left, int right)
+int	m_sort_partition(int *int_arr, int left, int right)
 {
 	int	mid;
-	int	n;
+	int	ret;
 
+	ret = 0;
 	mid = (left + right) / 2;
 	if (left < right)
 	{
-		m_sort_partition(int_arr, left, mid);
-		m_sort_partition(int_arr, mid + 1, right);
-		n = merge_sort(int_arr, left, mid, right);
-		if (n == -1)
-		{
-			free(int_arr);
-			int_arr = NULL;
-		}
+		ret = m_sort_partition(int_arr, left, mid);
+		if (ret == -1)
+			return (-1);
+		ret = m_sort_partition(int_arr, mid + 1, right);
+		if (ret == -1)
+			return (-1);
+		ret = merge_sort(int_arr, left, mid, right);
+		if (ret == -1)
+			return (-1);
 	}
+	return (0);
 }
 
-int	sort_ascending_and_arror_check(int *arr, int max)
+int	sort_ascending_and_error_check(int *arr, int max)
 {
 	int	i;
 	int	j;

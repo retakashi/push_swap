@@ -6,7 +6,7 @@
 /*   By: rtakashi <rtakashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 21:36:12 by rtakashi          #+#    #+#             */
-/*   Updated: 2023/04/20 23:28:21 by rtakashi         ###   ########.fr       */
+/*   Updated: 2023/05/03 17:54:14 by rtakashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stddef.h>
 # include <stdlib.h>
 # include <unistd.h>
+// # include <stdio.h>
 
 typedef struct s_list
 {
@@ -33,18 +34,17 @@ int					args_error_check(int argc, char **argv);
 //Libft
 int					ft_isdigit(int c);
 int					ft_lstsize(t_list *node);
-int					ft_atoi_intver(const char *str);
+int					ft_atoi_intver(const char *str, int *error_flg);
 
 //get_cie.c
 void				binary_search_cie(int *int_arr, t_list *node, int min,
 						int *max);
 
 //get_int_arr.c
-int					*get_int_arr(int argc, char **argv, int *int_arr,
+int					get_int_arr(int argc, char **argv, int **int_arr,
 						int *i_max);
 //get_list.c
-int					get_number(char *argv, int i, int *num);
-t_list				*get_node(int argc, char **argv);
+int					get_node(int argc, char **argv, t_list **node);
 
 //list_push.c
 void				pre_list_push(t_list **push, t_list **receive, int flg);
@@ -76,16 +76,17 @@ t_list				*sort_list_descending(t_list *head, int max, int arr[],
 
 //main.c
 void				put_operations(char *str);
-void				*ft_free(int *arr, t_list **stack);
+int					ft_free(int *arr, t_list **stack);
 
 //merge_sort_int_arr.c
-int					sort_ascending_and_arror_check(int *arr, int i_max);
-void				m_sort_partition(int *int_arr, int left, int right);
+int					sort_ascending_and_error_check(int *arr, int i_max);
+int					m_sort_partition(int *int_arr, int left, int right);
 
 //push_swap_utils.c
 void				list_swap(t_list *a, t_list *b, int flg);
 void				list_rotate(t_list **a_stack, t_list **b_stack, int flg);
 t_list				*list_reverse_rotate(t_list *stack, int flg);
+int					get_number(char *argv, int i, int *num);
 
 //push_swap.c
 void				push_swap(t_list *a_stack, int i_max);

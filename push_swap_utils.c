@@ -6,11 +6,37 @@
 /*   By: rtakashi <rtakashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 21:24:46 by reira             #+#    #+#             */
-/*   Updated: 2023/04/20 21:02:01 by rtakashi         ###   ########.fr       */
+/*   Updated: 2023/05/03 16:19:03 by rtakashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	get_number(char *argv, int i, int *num)
+{
+	int		j;
+	char	str[13];
+
+	j = 0;
+	while (argv[i] != '\0')
+	{
+		if (argv[i] == ' ' && argv[i + 1] != '\0')
+			i++;
+		if (argv[i] == '-' || argv[i] == '+')
+			str[j++] = argv[i++];
+		while (ft_isdigit(argv[i]))
+		{
+			str[j] = argv[i];
+			i++;
+			j++;
+		}
+		str[j] = '\0';
+		if (argv[i] == ' ' && argv[i + 1] != '\0')
+			break ;
+	}
+	*num = ft_atoi_intver(str, 0);
+	return (i);
+}
 
 //push->receive
 
