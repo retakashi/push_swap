@@ -41,5 +41,8 @@ If you want to check if it is sorted correctly↓
 
 ## Reference
 [push-swap-pain](https://github.com/kaaaaakun/push-swap-pain)
+
 [push_swap_tester](https://github.com/nafuka11/push_swap_tester)
+
 [42 Push Swap - 100 & 500 numbers high score :)](https://www.youtube.com/watch?v=2aMrmWOgLvU)
+
