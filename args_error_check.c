@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   args_error_check.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rtakashi <rtakashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: reira <reira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 14:41:38 by reira             #+#    #+#             */
-/*   Updated: 2023/04/20 23:09:28 by rtakashi         ###   ########.fr       */
+/*   Updated: 2024/10/03 16:12:40 by reira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ static int	argc2_get_number(char *argv, int i, char *str)
 static int	case_argc_over2(int argc, char **argv)
 {
 	int	i;
-	int	num;
 	int	error_flg;
 
 	i = 1;
@@ -51,7 +50,7 @@ static int	case_argc_over2(int argc, char **argv)
 	{
 		while (argv[i] != NULL)
 		{
-			num = ft_atoi_intver(argv[i], &error_flg);
+			ft_atoi_intver(argv[i], &error_flg);
 			if (error_flg == -1)
 				return (-1);
 			i++;
@@ -64,7 +63,6 @@ static int	case_argc_2(char *argv)
 {
 	char	str[13];
 	int		i;
-	int		num;
 	int		error_flg;
 
 	i = 0;
@@ -74,7 +72,7 @@ static int	case_argc_2(char *argv)
 		i = argc2_get_number(argv, i, str);
 		if (i == -1)
 			return (-1);
-		num = ft_atoi_intver(str, &error_flg);
+		ft_atoi_intver(str, &error_flg);
 		if (error_flg == -1)
 			return (-1);
 	}

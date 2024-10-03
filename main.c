@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rtakashi <rtakashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: reira <reira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 18:07:52 by rtakashi          #+#    #+#             */
-/*   Updated: 2023/05/03 17:55:18 by rtakashi         ###   ########.fr       */
+/*   Updated: 2024/10/03 16:13:22 by reira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 static int	put_error(int *arr, t_list **stack)
 {
-	int		i;
 	t_list	*node_next;
 
-	i = 0;
 	if (arr != NULL)
 		free(arr);
 	if (stack != NULL && *stack != NULL)

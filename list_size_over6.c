@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_size_over6.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rtakashi <rtakashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: reira <reira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 16:48:43 by rtakashi          #+#    #+#             */
-/*   Updated: 2023/04/20 21:02:42 by rtakashi         ###   ########.fr       */
+/*   Updated: 2024/10/03 16:13:55 by reira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,8 @@ static void	return_to_a_mod(t_list **a_stack,
 							int *i_max,
 							int mod)
 {
-	t_list	*a_stack_head;
 	int		cnt;
 
-	a_stack_head = *a_stack;
 	cnt = 0;
 	while (mod > cnt)
 	{

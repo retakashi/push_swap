@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rtakashi <rtakashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: reira <reira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 17:44:11 by rtakashi          #+#    #+#             */
-/*   Updated: 2023/04/26 18:35:17 by rtakashi         ###   ########.fr       */
+/*   Updated: 2024/10/03 16:14:14 by reira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,10 @@
 static t_list	*sort_size_over6(t_list *a_stack, int i_max)
 {
 	t_list	*b_stack;
-	int		i;
 	int		base;
 	int		num;
 
 	b_stack = NULL;
-	i = 0;
 	if (i_max < 500)
 		base = 7;
 	else
