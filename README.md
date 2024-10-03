@@ -12,7 +12,7 @@ cd push_swap
 make
 ./push_swap <array of positive numbers>
 ```
-![gif]()
+![gif](https://github.com/retakashi/push_swap/blob/main/push_swap.gif)
 
 ### results
  - sa(swap a): Swap the first 2 elements at the top of stack a.
