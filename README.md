@@ -1,4 +1,5 @@
 # push_swap
+![gif](https://github.com/retakashi/push_swap/blob/main/images/push_swap_visual.gif)
 
 ## Overview
 An algorithm that sorts using two stacks with the minimum number of operations possible.
@@ -10,11 +11,14 @@ macOS
 git clone ...
 cd push_swap
 make
-./push_swap <array of positive numbers>
+./push_swap <array of integer numbers>
 ```
-![gif](https://github.com/retakashi/push_swap/blob/main/push_swap.gif)
+![gif](https://github.com/retakashi/push_swap/blob/main/images/push_swap.gif)
 
-### results
+If you want to check if it is sorted correctly↓
+![gif](https://github.com/retakashi/push_swap/blob/main/images/push_swap_check.gif)
+
+### How to interpret the results
  - sa(swap a): Swap the first 2 elements at the top of stack a.
     Do nothing if there is only one or no elements.
  - sb(swap b): Swap the first 2 elements at the top of stack b.
@@ -34,3 +38,8 @@ make
  - rrb(reverse rotate b): Shift down all elements of stack b by 1.
     The last element becomes the first one.
  - rrr : rra and rrb at the same time.
+
+## Reference
+[push-swap-pain](https://github.com/kaaaaakun/push-swap-pain)
+[push_swap_tester](https://github.com/nafuka11/push_swap_tester)
+[42 Push Swap - 100 & 500 numbers high score :)](https://www.youtube.com/watch?v=2aMrmWOgLvU)
