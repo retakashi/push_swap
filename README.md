@@ -16,7 +16,7 @@ make
 ![gif](https://github.com/retakashi/push_swap/blob/main/images/push_swap.gif)
 
 If you want to check if it is sorted correctly↓
-![gif](https://github.com/retakashi/push_swap/blob/main/images/push_swap_check.gif)
+![gif](https://github.com/retakashi/push_swap/blob/main/images/push_swap_checker.gif)
 
 ### How to interpret the results
  - sa(swap a): Swap the first 2 elements at the top of stack a.
